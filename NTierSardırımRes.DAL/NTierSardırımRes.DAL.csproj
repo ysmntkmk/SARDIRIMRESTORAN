@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NTierSardırımRes.Entities\NTierSardırımRes.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

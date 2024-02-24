@@ -1,7 +1,12 @@
+using NTierSardýrýmRes.IOC.DependencyResolvers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddIdentityServices();
+builder.Services.AddDbContextService();
 
 var app = builder.Build();
 
