@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NTierSardırımRes.DAL\NTierSardırımRes.DAL.csproj" />
+    <ProjectReference Include="..\NTierSardırımRes.Entities\NTierSardırımRes.Entities.csproj" />
   </ItemGroup>
 
 </Project>

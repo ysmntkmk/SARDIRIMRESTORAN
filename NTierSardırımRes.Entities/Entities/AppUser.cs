@@ -22,13 +22,14 @@ namespace NTierSardırımRes.Entities.Entities
         public DateTime? ModifiedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
+        public bool IsActive { get; set; }
+
 
         // Relation Properties
         public virtual List<AppUserRole> UserRoles { get; set; }
         public virtual List<Reservation> Reservations { get; set; }
         public virtual List<Order> Orders { get; set; }
         public virtual List<Table> Tables { get; set; }//Garson rolündeki AppUser'larimizin masalarla ilgilenebilmesi adına olusturulmus bir ilişki
-
-
+       
     }
 }

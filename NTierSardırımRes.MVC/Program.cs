@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using NTierSardýrýmRes.BLL.Abstracts;
+using NTierSardýrýmRes.DAL.Context;
 using NTierSardýrýmRes.IOC.DependencyResolvers;
 
 var builder = WebApplication.CreateBuilder(args);

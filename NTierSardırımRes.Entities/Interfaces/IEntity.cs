@@ -14,6 +14,8 @@ namespace NTierSardırımRes.Entities.Interfaces
         public DateTime? ModifiedDate { get; set;}
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
+        public bool IsActive { get; set; }
+
 
 
     }

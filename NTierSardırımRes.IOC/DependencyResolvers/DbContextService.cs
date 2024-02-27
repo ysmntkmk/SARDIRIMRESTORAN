@@ -20,6 +20,8 @@ namespace NTierSardırımRes.IOC.DependencyResolvers
             services.AddDbContextPool<SardirimContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("MyConnection")).UseLazyLoadingProxies());
             return services;
 
+
+
         }
     }
 }

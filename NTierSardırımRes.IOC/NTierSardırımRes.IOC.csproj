@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NTierSardırımRes.BLL\NTierSardırımRes.BLL.csproj" />
     <ProjectReference Include="..\NTierSardırımRes.DAL\NTierSardırımRes.DAL.csproj" />
   </ItemGroup>
 
