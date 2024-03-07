@@ -5,7 +5,10 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.ProductViewModel
 {
     public class ProductCreateVM
     {
-       
+        public ProductCreateVM()
+        {
+            Status = DataStatus.Inserted;
+        }
         [Required(ErrorMessage = "Ürün adı boş geçilemez!")]
         public string ProductName { get; set; }
         [Required(ErrorMessage = "Ürün fiyat boş geçilemez!")]

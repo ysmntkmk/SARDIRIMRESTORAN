@@ -5,22 +5,22 @@ using NTierSardýrýmRes.BLL.Abstracts;
 using NTierSardýrýmRes.DAL.Context;
 using NTierSardýrýmRes.IOC.DependencyResolvers;
 using NTierSardýrýmRes.MVC.MapperProfiles;
+using NTierSardýrýmRes.MVC.UIDependencyResolver;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+
 builder.Services.AddIdentityServices();
 builder.Services.AddDbContextService();
 builder.Services.AddRepositoryService();
-MapperConfiguration mapperConfiguration = new MapperConfiguration(opt =>
-{
-    opt.AddProfile(new ProductProfile());
-});
-IMapper mapper = mapperConfiguration.CreateMapper();
 
-builder.Services.AddSingleton<IMapper>(mapper);
+builder.Services.AddMapperService();
+
+
 
 
 var app = builder.Build();

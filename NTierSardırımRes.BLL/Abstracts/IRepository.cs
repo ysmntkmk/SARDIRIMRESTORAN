@@ -6,10 +6,10 @@ namespace NTierSardırımRes.BLL.Abstracts
     public interface IRepository<T> where T : class,IEntity
     {
         //List
-        Task<IEnumerable<T>> GetAll(); //Ienumerable bir koleksiyon içinde farklı bir koleksiyonu teslim alı ve içerde kalan koleksiyonun değerlerini döngüye ihtiyaç duymadan teslim eder.
+        Task<IEnumerable<T>> GetAll(); //Ienumerable bir koleksiyon içinde farklı bir koleksiyonu teslim eder ve içerde kalan koleksiyonun değerlerini döngüye ihtiyaç duymadan teslim eder.
   
         IEnumerable<T> GetActive();
-  
+
         IEnumerable<T> GetIncative();
 
         //Destroy: Veritabanında veriyi doğrudan siler.

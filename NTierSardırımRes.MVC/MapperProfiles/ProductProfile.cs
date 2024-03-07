@@ -9,8 +9,11 @@ namespace NTierSardırımRes.MVC.MapperProfiles
         public ProductProfile()
         {
             CreateMap<Product, ProductCreateVM>().ReverseMap();
-            CreateMap<Product, ProductUpdateVM>().ReverseMap();
-            CreateMap<Product, ProductDeleteVM>().ReverseMap();  
+            CreateMap<ProductUpdateVM, Product>().ForMember(dest => dest.ProductIngredients, opt => opt.Ignore()).ForMember(dest => dest.OrderDetails, opt => opt.Ignore()).ReverseMap();
+            //CreateMap<Product, ProductUpdateVM>().ReverseMap();
+
+            CreateMap<Product, ProductDeleteVM>().ReverseMap();
+            //CreateMap<Deneme,DenemeVM>().ReverseMap();
         }
     }
 }

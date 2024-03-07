@@ -6,7 +6,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-
 <!-- Ürünlerin listelendiği tablo -->
 <table class="table">
     <thead>
@@ -45,18 +44,22 @@
                 </td>
                 <td>
                     <!-- Güncelleme butonu -->
-                    <form asp-controller="Product" asp-action="Update" method="post">
+                   @*  <form asp-controller="Product" asp-action="Update" method="post">
                         <input type="hidden" name="id" value="@product.ID" />
                         <button type="submit" class="btn btn-primary">Güncelle</button>
-                    </form>
+                    </form> *@
+                    <a asp-controller="Product" asp-action="Update" asp-route-id="@product.ID" class="btn btn-primary">Güncelle</a>
                 </td>
 
                 <td>
                     <!-- Silme butonu -->
-                    <form asp-controller="Product" asp-action="Delete" method="post">
+                   @*  <form asp-controller="Product" asp-action="Delete" method="post">
                         <input type="hidden" name="id" value="@product.ID" />
                         <button type="submit" class="btn btn-danger">Sil</button>
-                    </form>
+                    </form> *@
+
+                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.ID" class="btn btn-danger">Sil</a>
+
                 </td>
                 <td>
                     <!-- Ürün oluşturma butonu -->

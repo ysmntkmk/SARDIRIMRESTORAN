@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NTierSardırımRes.BLL.Abstracts;
 using NTierSardırımRes.Entities.Entities;
+using NTierSardırımRes.MVC.MapperProfiles;
 using NTierSardırımRes.MVC.Models.ViewModels.ProductViewModel;
 
 namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
@@ -46,15 +47,17 @@ namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
 
         // Update işlemi
 
-        [HttpGet]
+       
         public async Task<IActionResult> Update(int id) 
         {
+          
             var product = await _productRepository.GetByIdAsync(id);
-            if ( product != null)
+            if ( product.Item1 != null)
             {
 
-                var productUpdate = _mapper.Map<ProductUpdateVM>(product);
+                ProductUpdateVM productUpdate = _mapper.Map<ProductUpdateVM>(product.Item1);
 
+               
                 return View(productUpdate);
             }
            
@@ -88,7 +91,7 @@ namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(ProductDeleteVM model)
         {
            
-            Product pr = (await _productRepository.GetByIdAsync(model.Id)).Item1;
+            Product pr = (await _productRepository.GetByIdAsync(model.ID)).Item1;
             await _productRepository.DeleteAsync(pr);
             return RedirectToAction("Index");
         }
