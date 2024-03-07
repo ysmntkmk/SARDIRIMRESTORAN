@@ -23,7 +23,7 @@ namespace NTierSardırımRes.Entities.Entities
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
 
-        public bool IsActive { get; set; }
+     
 
         // Relation Properties
         public virtual List<AppUserRole> UserRoles { get; set; }

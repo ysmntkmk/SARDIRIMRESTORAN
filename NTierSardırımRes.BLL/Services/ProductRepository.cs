@@ -14,6 +14,7 @@ namespace NTierSardırımRes.BLL.Services
     {
         public ProductRepository (SardirimContext context) : base(context)
         { 
+           
         }
     }
 }

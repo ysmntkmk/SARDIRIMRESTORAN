@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NTierSardırımRes.Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace NTierSardırımRes.DAL.Configurations
         public override void Configure(EntityTypeBuilder<Order> builder)
         {
             base.Configure(builder);
+            builder.Property(x => x.TotalPrice).HasColumnType("money");
+            builder.Property(x => x.VAT).HasColumnType("money");
         }
     }
 }

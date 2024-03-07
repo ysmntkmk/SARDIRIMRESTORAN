@@ -9,7 +9,7 @@ namespace NTierSardırımRes.Entities.Enums
     public enum DataStatus
     {
         Inserted = 1,
-        Update = 2,
+        Updated = 2,
         Deleted = 3
 
     }

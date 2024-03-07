@@ -11,8 +11,7 @@ namespace NTierSardırımRes.Entities.Base
     public abstract class BaseEntitiy : IEntity
 
     {
-        public bool IsActive;
-
+     
         public BaseEntitiy()
         {
             CreatedDate = DateTime.Now;
@@ -24,7 +23,7 @@ namespace NTierSardırımRes.Entities.Base
         public DateTime? ModifiedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
-        bool IEntity.IsActive { get; set; }
+
     }
 }
 

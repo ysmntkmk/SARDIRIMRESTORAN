@@ -131,6 +131,9 @@ namespace NTierSardırımRes.DAL.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -181,6 +184,9 @@ namespace NTierSardırımRes.DAL.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -248,6 +254,9 @@ namespace NTierSardırımRes.DAL.Migrations
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -356,8 +365,14 @@ namespace NTierSardırımRes.DAL.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("money");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("VAT")
+                        .HasColumnType("money");
 
                     b.HasKey("ID");
 
@@ -389,6 +404,9 @@ namespace NTierSardırımRes.DAL.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Value")
+                        .HasColumnType("money");
 
                     b.HasKey("OrderID", "ProductID");
 

@@ -11,7 +11,10 @@ namespace NTierSardırımRes.Entities.Entities
     {
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
+      
         public string Description { get; set; }
+
+
 
         //Relational Properties
         public virtual List<ProductIngredient> ProductIngredients { get; set; }

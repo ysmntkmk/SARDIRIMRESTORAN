@@ -1,0 +1,81 @@
+﻿@using NTierSardırımRes.Entities.Enums
+@model List<Product>
+
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!-- Ürünlerin listelendiği tablo -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ürün Adı</th>
+            <th>Birim Fiyatı</th>
+            <th>Açıklama</th>
+            <th>Durum</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                
+                <td>@product.ID</td>
+                <td>@product.ProductName</td>
+                <td>@product.UnitPrice</td>
+                <td>@product.Description</td>
+                <td>
+                    @if (product.Status == DataStatus.Inserted)
+                    {
+                        <span class="badge badge-primary">Inserted</span>
+                    }
+                    else if (product.Status == DataStatus.Updated)
+                    {
+                        <span class="badge badge-warning">Updated</span>
+                    }
+                    else if (product.Status == DataStatus.Deleted)
+                    {
+                        <span class="badge badge-danger">Deleted</span>
+                    }
+                </td>
+                <td>
+                    <!-- Güncelleme butonu -->
+                    <form asp-controller="Product" asp-action="Update" method="post">
+                        <input type="hidden" name="id" value="@product.ID" />
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                    </form>
+                </td>
+
+                <td>
+                    <!-- Silme butonu -->
+                    <form asp-controller="Product" asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@product.ID" />
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+                <td>
+                    <!-- Ürün oluşturma butonu -->
+                    <form asp-controller="Product" asp-action="Create" method="post">
+                        <input type="hidden" name="id" value="@product.ID" />
+                        <button type="submit" class="btn btn-success">Oluştur</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+

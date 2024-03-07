@@ -9,7 +9,7 @@ namespace NTierSardırımRes.BLL.Concretes
     public class BaseRepository<T> : IRepository<T> where T : class,IEntity
     {
         private readonly SardirimContext _context;
-        private DbSet<T> _entities;
+        private  DbSet<T> _entities;
 
         public BaseRepository(SardirimContext context)
         {
@@ -21,7 +21,7 @@ namespace NTierSardırımRes.BLL.Concretes
         {
             try
             {
-                await _context.Set<T>().AddAsync(entity);
+                await _entities.AddAsync(entity);
                 await _context.SaveChangesAsync();
                 return "Entity has been created successfully.";
 
@@ -37,9 +37,9 @@ namespace NTierSardırımRes.BLL.Concretes
         {
             try
             {
-                
+
                 entity.Status = Entities.Enums.DataStatus.Deleted;
-                UpdateAsync(entity);
+                await UpdateAsync(entity);
                 return "Entity has been delete successfully";
             }
             catch (Exception ex)
@@ -52,7 +52,7 @@ namespace NTierSardırımRes.BLL.Concretes
         {
             try
             {
-                _context.Set<T>().RemoveRange(entity);
+                _entities.RemoveRange(entity);
                 await _context.SaveChangesAsync();
                 return "All data has been destroyed successfully.";
 
@@ -68,7 +68,7 @@ namespace NTierSardırımRes.BLL.Concretes
         {
             try
             {
-                _context.Set<T>().Remove(entity);
+                _entities.Remove(entity);
                 await _context.SaveChangesAsync();
                 return "Data has been destroyed successfully.";
 
@@ -80,22 +80,25 @@ namespace NTierSardırımRes.BLL.Concretes
             }
         }
 
-        public IEnumerable<T> GetActiveAsync()
+        public IEnumerable<T> GetActive()
         {
-            var activeData = _entities.Where(x => x.IsActive == true).ToList();
+            var activeData = _entities.Where(x => x.Status != Entities.Enums.DataStatus.Deleted).ToList();
             return activeData;
         }
 
 
-        public async Task<T> GetById(int id)
+        public async Task<Tuple<T?,string>> GetByIdAsync(int id)
         {
-            var data = await _entities.FirstOrDefaultAsync(x => x.ID == id);
-            return data;
+            T? data = await _entities.FirstOrDefaultAsync(x => x.ID == id);
+            if (data != null)
+                return Tuple.Create<T?,string>(data, "Veri basarılı sekilde bulundu");
+            return Tuple.Create(default(T), "Veri bulunamadı");
+          
         }
 
-        public IEnumerable<T> GetIncativeAsync()
+        public IEnumerable<T> GetIncative()
         {
-            var activeData = _entities.Where(x => x.IsActive == false).ToList();
+            var activeData = _entities.Where(x => x.Status == Entities.Enums.DataStatus.Deleted  ).ToList();
             return activeData;
         }
 
@@ -103,7 +106,7 @@ namespace NTierSardırımRes.BLL.Concretes
         {
             try
             {
-                _context.Set<T>().Update(entity);
+                _entities.Update(entity);
                 await _context.SaveChangesAsync();
                 return "Entity has been updated successfully.";
 
@@ -114,10 +117,13 @@ namespace NTierSardırımRes.BLL.Concretes
             }
         }
 
-        IEnumerable<T> IRepository<T>.GetAllAsync()
+        public async Task<IEnumerable<T>> GetAll()
         {
-            return _entities.ToList();
+            
+            return await _entities.ToListAsync();
         }
+
+       
     }
 }
 

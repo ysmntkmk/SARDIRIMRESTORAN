@@ -6,11 +6,11 @@ namespace NTierSardırımRes.BLL.Abstracts
     public interface IRepository<T> where T : class,IEntity
     {
         //List
-        IEnumerable<T> GetAllAsync(); //Ienumerable bir koleksiyon içinde farklı bir koleksiyonu teslim alı ve içerde kalan koleksiyonun değerlerini döngüye ihtiyaç duymadan teslim eder.
+        Task<IEnumerable<T>> GetAll(); //Ienumerable bir koleksiyon içinde farklı bir koleksiyonu teslim alı ve içerde kalan koleksiyonun değerlerini döngüye ihtiyaç duymadan teslim eder.
   
-        IEnumerable<T> GetActiveAsync();
+        IEnumerable<T> GetActive();
   
-        IEnumerable<T> GetIncativeAsync();
+        IEnumerable<T> GetIncative();
 
         //Destroy: Veritabanında veriyi doğrudan siler.
         Task<string> DestroyData(T entity);
@@ -21,7 +21,7 @@ namespace NTierSardırımRes.BLL.Abstracts
         Task<string> CreateAsync(T entity);
 
         //Read
-        Task<T> GetById(int id);
+        Task<Tuple<T?,string>> GetByIdAsync(int id);
 
         //Update
         Task<string> UpdateAsync(T entity);

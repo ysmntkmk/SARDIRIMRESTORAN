@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NTierSardırımRes.Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace NTierSardırımRes.DAL.Configurations
         {
             base.Configure(builder);
             builder.Ignore(x => x.ID);
+            builder.Property(x => x.Value).HasColumnType("money");
             builder.HasKey(x => new
             {
                 x.OrderID,

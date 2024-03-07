@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace NTierSardırımRes.BLL.Abstracts
 {
-    public interface IProductRepository:IRepository<Product>
+    public interface IProductRepository : IRepository<Product>
     {
+       
     }
 }
