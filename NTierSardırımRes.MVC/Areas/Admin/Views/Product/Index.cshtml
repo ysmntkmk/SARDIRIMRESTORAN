@@ -44,25 +44,19 @@
                 </td>
                 <td>
                     <!-- Güncelleme butonu -->
-                   @*  <form asp-controller="Product" asp-action="Update" method="post">
-                        <input type="hidden" name="id" value="@product.ID" />
-                        <button type="submit" class="btn btn-primary">Güncelle</button>
-                    </form> *@
+                   
                     <a asp-controller="Product" asp-action="Update" asp-route-id="@product.ID" class="btn btn-primary">Güncelle</a>
                 </td>
 
                 <td>
                     <!-- Silme butonu -->
-                   @*  <form asp-controller="Product" asp-action="Delete" method="post">
-                        <input type="hidden" name="id" value="@product.ID" />
-                        <button type="submit" class="btn btn-danger">Sil</button>
-                    </form> *@
 
                     <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.ID" class="btn btn-danger">Sil</a>
 
                 </td>
                 <td>
                     <!-- Ürün oluşturma butonu -->
+
                     <form asp-controller="Product" asp-action="Create" method="post">
                         <input type="hidden" name="id" value="@product.ID" />
                         <button type="submit" class="btn btn-success">Oluştur</button>
