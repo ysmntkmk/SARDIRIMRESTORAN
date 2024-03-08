@@ -29,18 +29,20 @@
                 <td>@product.UnitPrice</td>
                 <td>@product.Description</td>
                 <td>
+
                     @if (product.Status == DataStatus.Inserted)
                     {
-                        <span class="badge badge-primary">Inserted</span>
+                        <span style="color: blue;">Inserted</span>
                     }
                     else if (product.Status == DataStatus.Updated)
                     {
-                        <span class="badge badge-warning">Updated</span>
+                        <span style="color: green;">Updated</span>
                     }
                     else if (product.Status == DataStatus.Deleted)
                     {
-                        <span class="badge badge-danger">Deleted</span>
+                        <span style="color: red;">Deleted</span>
                     }
+
                 </td>
                 <td>
                     <!-- Güncelleme butonu -->

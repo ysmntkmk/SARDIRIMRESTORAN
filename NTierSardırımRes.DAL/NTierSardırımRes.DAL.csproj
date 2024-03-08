@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NTierSardırımRes.Common\NTierSardırımRes.Common.csproj" />
     <ProjectReference Include="..\NTierSardırımRes.Entities\NTierSardırımRes.Entities.csproj" />
+	
   </ItemGroup>
 
 </Project>
