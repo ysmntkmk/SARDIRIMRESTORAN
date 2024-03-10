@@ -1,0 +1,70 @@
+﻿@using NTierSardırımRes.Entities.Enums;
+@model List<Ingredient>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<!-- Listelendiği tablo -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>UnitsInStock</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ıngredient in Model)
+        {
+            <tr>
+
+                <td>@ıngredient.ID</td>
+                <td>@ıngredient.Name</td>
+                <td>@ıngredient.UnitsInStock</td>
+                
+                <td>
+
+                    @if (ıngredient.Status == DataStatus.Inserted)
+                    {
+                        <span style="color: blue;">Inserted</span>
+                    }
+                    else if (ıngredient.Status == DataStatus.Updated)
+                    {
+                        <span style="color: green;">Updated</span>
+                    }
+                    else if (ıngredient.Status == DataStatus.Deleted)
+                    {
+                        <span style="color: red;">Deleted</span>
+                    }
+
+                </td>
+                <td>
+                    <!-- Güncelleme butonu -->
+
+                    <a asp-controller="Ingredient" asp-action="Update" asp-route-id="@ıngredient.ID" class="btn btn-primary">Güncelle</a>
+                </td>
+
+                <td>
+                    <!-- Silme butonu -->
+
+                    <a asp-controller="Ingredient" asp-action="Delete" asp-route-id="@ıngredient.ID" class="btn btn-danger">Sil</a>
+
+                </td>
+                <td>
+                  
+                    <!-- Ürün oluşturma butonu -->
+
+                    <a asp-controller="Ingredient" asp-action="Create" asp-route-id="@ıngredient.ID" class="btn btn-success">Oluştur</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

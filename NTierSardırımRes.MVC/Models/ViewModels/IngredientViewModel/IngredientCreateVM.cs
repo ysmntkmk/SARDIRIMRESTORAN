@@ -9,7 +9,7 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.IngredientViewModel
         {
             Status = DataStatus.Inserted;
         }
-
+     
         [Required(ErrorMessage = "Boş geçilemez!")]
         public string Name { get; set; }
         public int UnitsInStock { get; set; }

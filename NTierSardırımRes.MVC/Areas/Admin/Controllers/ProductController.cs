@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NTierSardırımRes.BLL.Abstracts;
 using NTierSardırımRes.Entities.Entities;
-using NTierSardırımRes.MVC.MapperProfiles;
 using NTierSardırımRes.MVC.Models.ViewModels.ProductViewModel;
 
 namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
