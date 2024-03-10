@@ -5,56 +5,55 @@
 }
 
 
-<h2>Customers</h2>
+<h2>Müşteriler</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 
+
+
+<!-- Müşterilerin listelendiği tablo -->
 <table class="table">
     <thead>
         <tr>
-            <th>
-                FirstName
-            </th>
-            <th>
-                LastName
-            </th>
-            @* <th>
-                Adress
-            </th>
-            <th>
-                Phone
-            </th>
-            <th>
-                Email
-            </th> *@
+            <th>ID</th>
+            <th>İsim</th>
+            <th>Soyisim</th>
+            <th>Adres</th>
+            <th>Email</th>
+            <th>Telefon</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var customer in Model)
         {
             <tr>
+
+                <td>@customer.ID</td>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.Adress</td>
+                <td>@customer.Email</td>
+                <td>@customer.Phone</td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
+                    <!-- Güncelleme butonu -->
+
+                    <a asp-controller="Customer" asp-action="Update" asp-route-id="@customer.ID" class="btn btn-primary">Güncelle</a>
+                </td>
+
+                <td>
+                    <!-- Silme butonu -->
+
+                    <a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.ID" class="btn btn-danger">Sil</a>
+
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-               @*  <td>
-                    @Html.DisplayFor(modelItem => item.Adress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td> *@
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <!-- Ürün oluşturma butonu -->
+                    <a asp-controller="Customer" asp-action="Create" asp-route-id="@customer.ID" class="btn btn-success">Oluştur</a>
+
                 </td>
             </tr>
         }

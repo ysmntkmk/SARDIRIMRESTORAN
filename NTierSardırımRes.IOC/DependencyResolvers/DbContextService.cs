@@ -17,7 +17,7 @@ namespace NTierSardırımRes.IOC.DependencyResolvers
             ServiceProvider provider = services.BuildServiceProvider();
 
             IConfiguration configuration = provider.GetService<IConfiguration>();
-            services.AddDbContextPool<SardirimContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("MyConnection")).UseLazyLoadingProxies());
+            services.AddDbContextPool<SardirimContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("MyConnection"),opt => opt.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalMinutes)).UseLazyLoadingProxies());
             return services;
 
 

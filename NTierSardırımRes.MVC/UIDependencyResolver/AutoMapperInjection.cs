@@ -10,6 +10,8 @@ namespace NTierSardırımRes.MVC.UIDependencyResolver
             MapperConfiguration mapperConf = new(opt =>
             {
                 opt.AddProfile(new ProductProfile());
+                opt.AddProfile(new CustomerProfile());
+                opt.AddProfile(new IngredientProfile());
             });
 
             IMapper mapper = mapperConf.CreateMapper();

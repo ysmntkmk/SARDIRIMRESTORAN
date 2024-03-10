@@ -1,15 +1,17 @@
-﻿using NTierSardırımRes.Entities.Enums;
+﻿
+using NTierSardırımRes.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace NTierSardırımRes.MVC.Models.ViewModels.CustomerVİewModel
+namespace NTierSardırımRes.MVC.Models.ViewModels.CustomerViewModel
 {
     public class CustomerCreateVM
 
     {
         public CustomerCreateVM() 
         {
-           DataStatus status = DataStatus.Inserted;
+            Status = DataStatus.Inserted;
         }
+
         [Required(ErrorMessage = " adı boş geçilemez!")]
         public string FirstName { get; set; }
 
@@ -20,7 +22,7 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.CustomerVİewModel
         public string? Phone { get; set; }
 
         public string Email { get; set; }
-
+        public DataStatus Status { get; set; }
 
     }
 }

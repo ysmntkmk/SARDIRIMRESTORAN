@@ -15,5 +15,6 @@ namespace NTierSardırımRes.MVC.MapperProfiles
             CreateMap<Product, ProductDeleteVM>().ReverseMap();
             //CreateMap<Deneme,DenemeVM>().ReverseMap();
         }
+
     }
 }
