@@ -1,0 +1,50 @@
+﻿@model OrderDeleteVM
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Type
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Type
+        </dd>
+        <dt class="col-sm-2">
+            CustomerID
+        </dt>
+        <dd class="col-sm-10">
+            @Model.CustomerID
+        </dd>
+        <dt class="col-sm-2">
+            ReservationID
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ReservationID
+        </dd>
+        <dt class="col-sm-2">
+            AppUserID
+        </dt>
+        <dd class="col-sm-10">
+            @Model.AppUserID
+        </dd>
+        <dt class="col-sm-2">
+            TotalPrice
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TotalPrice
+        </dd>
+        <dt class="col-sm-2">
+            VAT
+        </dt>
+        <dd class="col-sm-10">
+            @Model.VAT
+        </dd>
+    </dl>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="ID" />
+        <button type="submit" class="btn btn-danger">Delete</button> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

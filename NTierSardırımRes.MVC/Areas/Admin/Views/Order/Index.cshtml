@@ -1,0 +1,83 @@
+﻿@using NTierSardırımRes.Entities.Enums;
+@model List<Order>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<!-- Listelendiği tablo -->
+
+<table class="table">
+
+    <thead>
+        <tr>
+
+            <th>ID</th>
+            <th>Type</th>
+            <th>CustomerID</th>
+            <th>ReservationID</th>
+            <th>AppUserID</th>
+            <th>TotalPrice</th>
+            <th>VAT</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+
+                <td>@order.ID</td>
+                <td>@order.Type</td>
+                <td>@order.CustomerID</td>
+                <td>@order.ReservationID</td>
+                <td>@order.AppUserID</td>
+                <td>@order.TotalPrice</td>
+                <td>@order.VAT</td>
+               
+
+                <td>
+
+                    @if (order.Status == DataStatus.Inserted)
+                    {
+                        <span style="color: blue;">Inserted</span>
+                    }
+                    else if (order.Status == DataStatus.Updated)
+                    {
+                        <span style="color: green;">Updated</span>
+                    }
+                    else if (order.Status == DataStatus.Deleted)
+                    {
+                        <span style="color: red;">Deleted</span>
+                    }
+
+                </td>
+             
+                <td>
+                    <!-- Güncelleme butonu -->
+
+                    <a asp-controller="Order" asp-action="Update" asp-route-id="@order.ID" class="btn btn-primary">Güncelle</a>
+                </td>
+
+                <td>
+                    <!-- Silme butonu -->
+
+                    <a asp-controller="Order" asp-action="Delete" asp-route-id="@order.ID" class="btn btn-danger">Sil</a>
+
+                </td>
+                <td>
+
+                    <!-- Ürün oluşturma butonu -->
+
+                    <a asp-controller="Order" asp-action="Create" asp-route-id="@order.ID" class="btn btn-success">Oluştur</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

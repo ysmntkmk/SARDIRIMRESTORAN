@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using NTierSardırımRes.Entities.Entities;
-using NTierSardırımRes.MVC.Models.ViewModels.IngredientViewModel;
+using NTierSardırımRes.MVC.Models.ViewModels.OrderViewModel;
 
 namespace NTierSardırımRes.MVC.MapperProfiles
 {
@@ -8,11 +8,11 @@ namespace NTierSardırımRes.MVC.MapperProfiles
     {
         public OrderProfile()
         {
-            CreateMap<Order, >().ReverseMap();
+            CreateMap<Order, OrderCreateVM>().ReverseMap();
 
-            CreateMap<Order, IngredientDeleteVM>().ReverseMap();
+            CreateMap<Order, OrderDeleteVM>().ReverseMap();
 
-            CreateMap<Order, IngredientUpdateVM>().ReverseMap();
+            CreateMap<Order, OrderUpdateVM>().ReverseMap();
         }
     }
 }
