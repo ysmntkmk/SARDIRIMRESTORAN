@@ -45,8 +45,6 @@ namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
         }
 
         // Update işlemi
-
-       
         public async Task<IActionResult> Update(int id) 
         {
           
