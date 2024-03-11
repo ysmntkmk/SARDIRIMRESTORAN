@@ -1,0 +1,76 @@
+﻿@using NTierSardırımRes.Entities.Enums;
+@model List<Table>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<!-- Listelendiği tablo -->
+
+<table class="table">
+
+    <thead>
+        <tr>
+
+            <th>ID</th>
+            <th>Available</th>
+            <th>TableNo</th>
+            <th>Description</th>
+            <th>AppUserID</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var table in Model)
+        {
+            <tr>
+
+                <td>@table.ID</td>
+                <td>@table.Available</td>
+                <td>@table.TableNo</td>
+                <td>@table.Description</td>
+                <td>@table.AppUserID</td>
+
+                <td>
+
+                    @if (table.Status == DataStatus.Inserted)
+                    {
+                        <span style="color: blue;">Inserted</span>
+                    }
+                    else if (table.Status == DataStatus.Updated)
+                    {
+                        <span style="color: green;">Updated</span>
+                    }
+                    else if (table.Status == DataStatus.Deleted)
+                    {
+                        <span style="color: red;">Deleted</span>
+                    }
+
+                </td>
+                <td>
+                    <!-- Güncelleme butonu -->
+
+                    <a asp-controller="Table" asp-action="Update" asp-route-id="@table.ID" class="btn btn-primary">Güncelle</a>
+                </td>
+
+                <td>
+                    <!-- Silme butonu -->
+
+                    <a asp-controller="Table" asp-action="Delete" asp-route-id="@table.ID" class="btn btn-danger">Sil</a>
+
+                </td>
+                <td>
+
+                    <!-- Ürün oluşturma butonu -->
+
+                    <a asp-controller="Table" asp-action="Create" asp-route-id="@table.ID" class="btn btn-success">Oluştur</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

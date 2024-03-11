@@ -1,0 +1,41 @@
+﻿@model TableDeleteVM
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            Available
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Available
+        </dd>
+        <dt class="col-sm-2">
+            Table No
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TableNo
+        </dd>
+        <dt class="col-sm-2">
+            Description
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Description
+        </dd>
+        <dt class="col-sm-2">
+            App User ID
+        </dt>
+        <dd class="col-sm-10">
+            @Model.AppUserID
+        </dd>
+    </dl>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="ID" />
+        <button type="submit" class="btn btn-danger">Delete</button> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
+

@@ -12,6 +12,8 @@ namespace NTierSardırımRes.MVC.UIDependencyResolver
                 opt.AddProfile(new ProductProfile());
                 opt.AddProfile(new CustomerProfile());
                 opt.AddProfile(new IngredientProfile());
+                opt.AddProfile(new TableProfile());
+                opt.AddProfile(new ReservationProfile());
             });
 
             IMapper mapper = mapperConf.CreateMapper();

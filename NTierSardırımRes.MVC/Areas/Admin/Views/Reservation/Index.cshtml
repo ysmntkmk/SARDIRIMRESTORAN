@@ -1,0 +1,80 @@
+﻿@using NTierSardırımRes.Entities.Enums;
+@model List<Reservation>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<!-- Listelendiği tablo -->
+
+<table class="table">
+
+    <thead>
+        <tr>
+
+            <th>ID</th>
+            <th>Day</th>
+            <th>Month</th>
+            <th>Date</th>
+            <th>Hour</th>
+            <th>CustomerID</th>
+            <th>AppUserID</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+
+                <td>@reservation.ID</td>
+                <td>@reservation.Day</td>
+                <td>@reservation.Month</td>
+                <td>@reservation.Date</td>
+                <td>@reservation.Hour</td>
+                <td>@reservation.CustomerID</td>
+                <td>@reservation.AppUserID</td>
+
+                <td>
+
+                    @if (reservation.Status == DataStatus.Inserted)
+                    {
+                        <span style="color: blue;">Inserted</span>
+                    }
+                    else if (reservation.Status == DataStatus.Updated)
+                    {
+                        <span style="color: green;">Updated</span>
+                    }
+                    else if (reservation.Status == DataStatus.Deleted)
+                    {
+                        <span style="color: red;">Deleted</span>
+                    }
+
+                </td>
+                <td>
+                    <!-- Güncelleme butonu -->
+
+                    <a asp-controller="Reservation" asp-action="Update" asp-route-id="@reservation.ID" class="btn btn-primary">Güncelle</a>
+                </td>
+
+                <td>
+                    <!-- Silme butonu -->
+
+                    <a asp-controller="Reservation" asp-action="Delete" asp-route-id="@reservation.ID" class="btn btn-danger">Sil</a>
+
+                </td>
+                <td>
+
+                    <!-- Ürün oluşturma butonu -->
+
+                    <a asp-controller="Reservation" asp-action="Create" asp-route-id="@reservation.ID" class="btn btn-success">Oluştur</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
