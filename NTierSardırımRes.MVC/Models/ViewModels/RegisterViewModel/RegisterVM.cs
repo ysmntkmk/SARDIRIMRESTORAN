@@ -4,21 +4,23 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.RegisterViewModel
 {
     public class RegisterVM
     {
-        [Required(ErrorMessage = "Kullanıcı adı boş geçilemez!")]
-        [Display(Name = "Kullanıcı adı")]
-        public string Username { get; set; }
+        [Display(Name = "Müşteri Ad")]
+        public string CustomerName { get; set; }
+        [Display(Name = "Müşteri Soyad")]
+        public string CustomerSurname { get; set; }
 
-        [Required(ErrorMessage = "Email boş geçilemez!")]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        [Required(ErrorMessage = "Şifre boş geçilemez!")]
+        [Display(Name = "Kullanıcı Adı")]
+        public string UserName { get; set; }
         [Display(Name = "Şifre")]
         public string Password { get; set; }
+        [Display(Name = "Şifre Tekrar")]
+        public string PasswordConfirmed { get; set; }
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+        [Display(Name = "Cep No")]
 
-        [Required(ErrorMessage = "Şifre (Tekrar) boş geçilemez!")]
-        [Display(Name = "Şifre (Tekrar)")]
-        [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor.")]
-        public string ConfirmPassword { get; set; }
+        public string PhoneNumber { get; set; }
+
+    
     }
 }

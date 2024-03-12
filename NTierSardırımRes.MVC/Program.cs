@@ -1,10 +1,7 @@
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
-using NTierSardýrýmRes.BLL.Abstracts;
+using Microsoft.AspNetCore.Identity;
 using NTierSardýrýmRes.DAL.Context;
+using NTierSardýrýmRes.Entities.Entities;
 using NTierSardýrýmRes.IOC.DependencyResolvers;
-using NTierSardýrýmRes.MVC.MapperProfiles;
 using NTierSardýrýmRes.MVC.UIDependencyResolver;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +16,6 @@ builder.Services.AddDbContextService();
 builder.Services.AddRepositoryService();
 
 builder.Services.AddMapperService();
-
 
 
 

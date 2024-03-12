@@ -22,7 +22,8 @@ namespace NTierSardırımRes.Entities.Entities
         public DateTime? ModifiedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
-       
+        public string CustomerName { get; set; }
+        public string CustomerSurname { get; set; }
 
 
         // Relation Properties
