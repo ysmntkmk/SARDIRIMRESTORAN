@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace NTierSardırımRes.MVC.Controllers
 {
-    //Askım seni cok seviyorum
+   
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,7 +18,6 @@ namespace NTierSardırımRes.MVC.Controllers
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             return View();
