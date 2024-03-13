@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NTierSardırımRes.Entities.Entities;
 using NTierSardırımRes.MVC.Models.ViewModels.ForgotPasswordViewModel;
 using NTierSardırımRes.MVC.Models.ViewModels.LoginViewModel;
@@ -20,13 +19,12 @@ namespace NTierSardırımRes.MVC.Controllers
             _signInManager = signInManager;
         }
 
-
-
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
         {
@@ -41,6 +39,9 @@ namespace NTierSardırımRes.MVC.Controllers
             }
             return View(model);
         }
+
+        // Diğer Controller metodları.
+
 
 
         [HttpGet]
@@ -76,7 +77,12 @@ namespace NTierSardırımRes.MVC.Controllers
                 {
                     // Başarılı bir şekilde kaydedilen kullanıcıyı oturum açma işlemine tabi tut
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Account");
+
+                    // Başarı mesajını modelde ayarla
+                    model.SuccessMessage = "Kayıt işlemi başarıyla tamamlandı. Hoş geldiniz!";
+
+                    // ModelState.IsValid false olduğunda veya kayıt işlemi başarısız olduğunda, aynı sayfayı tekrar göster
+                    return View(model);
                 }
 
                 // Kayıt işlemi başarısız olduysa, hata iletisini model state'e ekle
@@ -88,8 +94,6 @@ namespace NTierSardırımRes.MVC.Controllers
             // ModelState.IsValid false olduğunda veya kayıt işlemi başarısız olduğunda, aynı sayfayı tekrar göster
             return View(model);
         }
-
-
 
 
         [HttpPost]
