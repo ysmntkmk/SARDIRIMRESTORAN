@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using NTierSardırımRes.DAL.Context;
 using NTierSardırımRes.Entities.Entities;
 using System;
@@ -21,8 +22,12 @@ namespace NTierSardırımRes.IOC.DependencyResolvers
                 x.Password.RequiredLength = 2;
                 x.SignIn.RequireConfirmedEmail = true;
                 x.Password.RequireNonAlphanumeric = false;
-            }).AddEntityFrameworkStores<SardirimContext>();
+            }).AddEntityFrameworkStores<SardirimContext>()
+            .AddDefaultTokenProviders();
+
             return services;
+     
+    
         }
     }
 }

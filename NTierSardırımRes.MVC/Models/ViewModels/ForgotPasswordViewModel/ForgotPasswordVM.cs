@@ -5,6 +5,7 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.ForgotPasswordViewModel
 {
     public class ForgotPasswordVM
     {
+        public string Email { get; set; }
         public string UserId { get; set; }
         public string Token { get; set; }
 
@@ -17,5 +18,6 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.ForgotPasswordViewModel
         [DisplayName("Şifre Tekrar")]
         [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor.")]
         public string ConfirmPassword { get; set; }
+       
     }
 }

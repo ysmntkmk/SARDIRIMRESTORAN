@@ -2,6 +2,7 @@
 using NTierSardırımRes.BLL.Abstracts;
 using NTierSardırımRes.BLL.Concretes;
 using NTierSardırımRes.BLL.Services;
+using NTierSardırımRes.Common.EmailSender;
 
 namespace NTierSardırımRes.IOC.DependencyResolvers
 {
@@ -23,7 +24,7 @@ namespace NTierSardırımRes.IOC.DependencyResolvers
             services.AddScoped<IReservationRepository, ReservationRepository>();
             services.AddScoped<IReservedTableRepository, ReservedTableRepository>();
             services.AddScoped<ITableRepository, TableRepository>();
-
+            services.AddScoped<EmailSender>();
             return services;
         }
     }

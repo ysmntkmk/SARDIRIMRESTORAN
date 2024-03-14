@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using NTierSardýrýmRes.Common.EmailSender;
 using NTierSardýrýmRes.DAL.Context;
 using NTierSardýrýmRes.Entities.Entities;
 using NTierSardýrýmRes.IOC.DependencyResolvers;
@@ -8,16 +9,25 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-
-
 builder.Services.AddIdentityServices();
+
 builder.Services.AddDbContextService();
 builder.Services.AddRepositoryService();
 
 builder.Services.AddMapperService();
 
-
+//Cookie
+builder.Services.ConfigureApplicationCookie(x =>
+{
+    x.LoginPath = new PathString("/Home/Login");
+    x.AccessDeniedPath = new PathString("/Home/DeniedPage");
+    x.Cookie = new CookieBuilder
+    {
+        Name = "SardirimRestorant_Cookie"
+    };
+    x.SlidingExpiration = true;
+    x.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+});
 
 var app = builder.Build();
 
@@ -35,6 +45,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 
 

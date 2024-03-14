@@ -1,173 +1,204 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Castle.Core.Smtp;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using NTierSardırımRes.Common.EmailSender;
 using NTierSardırımRes.Entities.Entities;
 using NTierSardırımRes.MVC.Models.ViewModels.ForgotPasswordViewModel;
 using NTierSardırımRes.MVC.Models.ViewModels.LoginViewModel;
 using NTierSardırımRes.MVC.Models.ViewModels.RegisterViewModel;
 using NTierSardırımRes.MVC.Models.ViewModels.ResetPasswordViemModel;
+using System.Text.Encodings.Web;
+using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NTierSardırımRes.MVC.Controllers
 {
+    // Hesap işlemleri için Controller sınıfı
     public class AccountController : Controller
     {
+        // Kullanıcı yönetimi işlemleri için UserManager ve SignInManager nesneleri
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly EmailSender _emailSender;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, EmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender; // EmailSender bağımlılığını enjekte edin
         }
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginVM model)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Account");
-                }
-                ModelState.AddModelError(string.Empty, "Geçersiz giriş denemesi.");
-            }
-            return View(model);
-        }
-
-        // Diğer Controller metodları.
-
-
-
+        // Kayıt sayfasını GET isteği ile gösterir
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
+        // Kayıt işlemini POST isteği ile gerçekleştirir
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM model)
         {
             if (ModelState.IsValid)
             {
-                // Şifre ve şifre tekrar alanlarının eşleştiğini kontrol et
-                if (model.Password != model.PasswordConfirmed)
+                var user = new AppUser
                 {
-                    ModelState.AddModelError(string.Empty, "Şifreler uyuşmuyor.");
-                    return View(model);
-                }
+                    Email = model.Email,
+                    UserName = model.UserName,
+                };
 
-                // Kullanıcı adının (Email) veritabanında kullanılıp kullanılmadığını kontrol et
-                var existingUser = await _userManager.FindByEmailAsync(model.Email);
-                if (existingUser != null)
-                {
-                    ModelState.AddModelError(string.Empty, "Bu e-posta adresi zaten kullanımda.");
-                    return View(model);
-                }
-
-                // Yeni kullanıcıyı oluştur
-                var user = new AppUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
-                    // Başarılı bir şekilde kaydedilen kullanıcıyı oturum açma işlemine tabi tut
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+                    var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = encodedToken }, Request.Scheme);
 
-                    // Başarı mesajını modelde ayarla
-                    model.SuccessMessage = "Kayıt işlemi başarıyla tamamlandı. Hoş geldiniz!";
+                    // Doğrulama e-postası gönderme işlemi
+                    await _emailSender.SendEmailAsync(model.Email, "Hesabınızı doğrulayın", $"Lütfen hesabınızı doğrulamak için <a href='{HtmlEncoder.Default.Encode(confirmationLink)}'>buraya tıklayın</a>.");
 
-                    // ModelState.IsValid false olduğunda veya kayıt işlemi başarısız olduğunda, aynı sayfayı tekrar göster
-                    return View(model);
+                    // Kullanıcıyı bilgilendirme mesajı
+                    ViewBag.Message = "Kaydınız başarıyla oluşturuldu. Lütfen e-posta adresinize gönderilen doğrulama bağlantısını kullanarak hesabınızı doğrulayın.";
+                    return View("Index");
                 }
 
-                // Kayıt işlemi başarısız olduysa, hata iletisini model state'e ekle
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            // ModelState.IsValid false olduğunda veya kayıt işlemi başarısız olduğunda, aynı sayfayı tekrar göster
+
             return View(model);
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Account");
-        }
+
+        // Giriş sayfasını GET isteği ile gösterir
         [HttpGet]
-        public IActionResult ForgotPassword()
+        public IActionResult Login()
         {
             return View();
         }
 
+        // Giriş işlemini POST isteği ile gerçekleştirir
         [HttpPost]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByIdAsync(model.UserId);
-                if (user == null)
-                {
-                    // Kullanıcı bulunamadı
-                    ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı.");
-                    return View(model);
-                }
-
-                var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
-                if (result.Succeeded)
-                {
-                    // Şifre sıfırlama başarılı oldu, kullanıcıyı giriş sayfasına yönlendir
-                    TempData["SuccessMessage"] = "Şifre sıfırlama işlemi başarılı. Yeni şifrenizle giriş yapabilirsiniz.";
-                    return RedirectToAction("Login", "Account");
-                }
-                else
-                {
-                    // Şifre sıfırlama başarısız oldu, hata mesajlarını modele ekle
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                }
-            }
-            // Model geçersiz ise, formu tekrar göster
-            return View(model);
-        }
-
-        [HttpGet]
-        public IActionResult ResetPassword(string token, string email)
-        {
-            if (token == null || email == null)
-            {
-                // Token veya email bilgisi yoksa, hata sayfasına yönlendir
-                return RedirectToAction("Error", "Home");
-            }
-
-            var model = new ResetPasswordVM { Token = token, Email = email };
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ResetPassword(ResetPasswordVM model)
+        public async Task<IActionResult> Login(LoginVM model)
         {
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user != null)
                 {
-                    var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-                        // Şifre sıfırlama başarılı, kullanıcıyı giriş sayfasına yönlendir
-                        return RedirectToAction("Login", "Account");
+                        // Giriş başarılıysa ana sayfaya yönlendir
+                        return RedirectToAction("Index", "Home");
                     }
+                }
+            }
+            // Giriş başarısız ise, geçersiz giriş denemesi hatası ekle
+            ModelState.AddModelError(string.Empty, "Geçersiz giriş denemesi.");
+            return View(model);
+        }
+
+
+        // E-posta doğrulama işlemi için Confirmation metodunu GET isteği ile gösterir
+        [HttpGet]
+        public async Task<IActionResult> Confirmation(int id, string token)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
+            if (user != null)
+            {
+                var decodeToken = System.Web.HttpUtility.UrlDecode(token);
+                var result = await _userManager.ConfirmEmailAsync(user, decodeToken);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Login), "Account");
+                }
+            }
+
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
+        // Kullanıcıyı çıkış yapmaya yönlendirir
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
+        // Şifremi unuttum sayfasını GET isteği ile gösterir
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        // Şifremi unuttum işlemini POST isteği ile gerçekleştirir
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı.");
+                    return View(model);
+                }
+
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var encodedToken = System.Web.HttpUtility.UrlEncode(token.ToString());
+                string resetPasswordLink = Url.Action(nameof(ResetPassword), "Account", new { token = encodedToken, email = user.Email }, Request.Scheme);
+
+                var emailSender = new EmailSender(); // EmailSender sınıfının bir örneğini oluşturun
+                await emailSender.SendEmailAsync(model.Email, "Şifre Sıfırlama", $"Şifrenizi sıfırlamak için lütfen linki tıklayın. {resetPasswordLink}");
+
+
+                TempData["SuccessMessage"] = "Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.";
+                return RedirectToAction(nameof(Login), "Account");
+            }
+
+            return View(model);
+        }
+
+        // Şifre sıfırlama sayfasını GET isteği ile gösterir
+        [HttpGet]
+        public IActionResult ResetPassword(string token, string email)
+        {
+            if (token == null || email == null)
+            {
+                return RedirectToAction(nameof(Error), "Home");
+            }
+
+            var model = new ResetPasswordVM { Token = token, Email = email };
+            return View(model);
+        }
+
+        // Şifre sıfırlama işlemini POST isteği ile gerçekleştirir
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+                if (user != null)
+                {
+                    var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction(nameof(Login), "Account");
+                    }
+
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
@@ -175,14 +206,11 @@ namespace NTierSardırımRes.MVC.Controllers
                 }
                 else
                 {
-                    // Kullanıcı bulunamadı
                     ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı.");
                 }
             }
-            // Model geçersizse, formu tekrar göster
+
             return View(model);
         }
-
     }
 }
-
