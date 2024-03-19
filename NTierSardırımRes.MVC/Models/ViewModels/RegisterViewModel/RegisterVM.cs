@@ -4,31 +4,22 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.RegisterViewModel
 {
     public class RegisterVM
     {
-        internal string SuccessMessage;
-        [Required(ErrorMessage = "Müşteri adı alanı gereklidir.")]
-        [Display(Name = "Müşteri Ad")]
-        public string CustomerName { get; set; }
-        [Required(ErrorMessage = "Müşteri adı alanı gereklidir.")]
-        [Display(Name = "Müşteri Soyad")]
-        public string CustomerSurname { get; set; }
-        [Required(ErrorMessage = "Müşteri adı alanı gereklidir.")]
-        [Display(Name = "Kullanıcı Adı")]
-        public string UserName { get; set; }
-        [Required(ErrorMessage = "Müşteri adı alanı gereklidir.")]
-        [Display(Name = "Şifre")]
-        public string Password { get; set; }
-        [Required(ErrorMessage = "Müşteri adı alanı gereklidir.")]
-        [Display(Name = "Şifre Tekrar")]
-        public string PasswordConfirmed { get; set; }
-        [Required(ErrorMessage = "Müşteri adı alanı gereklidir.")]
+        [Required(ErrorMessage = "Kullanıcı adı boş geçilemez!")]
+        [Display(Name = "Kullanıcı adı")]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "Email boş geçilemez!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Display(Name = "Cep No")]
-        public string PhoneNumber { get; set; }
+        [Required(ErrorMessage = "Şifre boş geçilemez!")]
+        [Display(Name = "Şifre")]
+        public string Password { get; set; }
 
-       
-
+        [Required(ErrorMessage = "Şifre (Tekrar) boş geçilemez!")]
+        [Display(Name = "Şifre (Tekrar)")]
+        [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor.")]
+        public string ConfirmPassword { get; set; }
 
     }
 }

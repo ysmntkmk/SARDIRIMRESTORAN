@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using NTierSardırımRes.Common;
 using NTierSardırımRes.DAL.Configurations;
+using NTierSardırımRes.Entities.Base;
 using NTierSardırımRes.Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -46,6 +48,43 @@ namespace NTierSardırımRes.DAL.Context
         public DbSet<ProductIngredient> ProductIngredients { get; set; }
         public DbSet<ReservedTable> ReservedTables { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            //ChangeTracker
+
+            try
+            {
+                var modifiedEntries = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
+
+                foreach (var entry in modifiedEntries)
+                {
+
+                    if (entry is BaseEntitiy)
+                    {
+                        var entityRepository = entry.Entity as BaseEntitiy;
+                        entityRepository.CreatedIpAddress = IPAddressFinder.GetHostName();
+
+                        if (entry.State == EntityState.Modified)
+                        {
+                            entityRepository.UpdatedDate = DateTime.Now;
+                            entityRepository.UpdatedIpAddress = IPAddressFinder.GetHostName();
+                            entityRepository.UpdatedComputerName = System.Environment.MachineName;
+
+
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
     }
 }

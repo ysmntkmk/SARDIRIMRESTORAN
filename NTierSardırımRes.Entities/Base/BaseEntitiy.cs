@@ -23,7 +23,10 @@ namespace NTierSardırımRes.Entities.Base
         public DateTime? ModifiedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
-
+        public string CreatedIpAddress { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public string UpdatedIpAddress { get; set; }
+        public string UpdatedComputerName { get; set; }
     }
 }
 

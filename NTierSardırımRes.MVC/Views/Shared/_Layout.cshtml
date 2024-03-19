@@ -25,24 +25,21 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        </ul>
+                    </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-action="Register" asp-controller="Account">Hesap Oluştur</a>
+                            <a class="nav-link" asp-action="Register" asp-controller="Home">Hesap Oluştur</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-action="Login" asp-controller="Account">Giriş</a>
+                            <a class="nav-link" asp-action="Login" asp-controller="Home">Giriş</a>
                         </li>
-                       
                     </ul>
-                   
                     @if (User.Identity.IsAuthenticated)
                     {
                         <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
                             <button type="submit" class="btn btn-link">Çıkış Yap</button>
                         </form>
                     }
-
                 </div>
             </div>
         </nav>
@@ -52,7 +49,6 @@
             @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - NTierSardırımRes.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -64,3 +60,4 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+

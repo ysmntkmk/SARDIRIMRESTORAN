@@ -2,7 +2,7 @@
 using NTierSardırımRes.BLL.Abstracts;
 using NTierSardırımRes.BLL.Concretes;
 using NTierSardırımRes.BLL.Services;
-using NTierSardırımRes.Common.EmailSender;
+using NTierSardırımRes.Common;
 
 namespace NTierSardırımRes.IOC.DependencyResolvers
 {

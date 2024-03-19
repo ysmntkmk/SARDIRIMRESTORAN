@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-using NTierSardýrýmRes.Common.EmailSender;
-using NTierSardýrýmRes.DAL.Context;
-using NTierSardýrýmRes.Entities.Entities;
 using NTierSardýrýmRes.IOC.DependencyResolvers;
 using NTierSardýrýmRes.MVC.UIDependencyResolver;
 
