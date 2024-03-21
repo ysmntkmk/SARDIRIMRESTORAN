@@ -11,7 +11,7 @@ namespace NTierSardırımRes.Entities.Entities
 {
     public class AppUser : IdentityUser<int>, IEntity
     {
-        public AppUser() 
+        public AppUser()
         {
             CreatedDate = DateTime.Now;
             Status = DataStatus.Inserted;
@@ -22,8 +22,6 @@ namespace NTierSardırımRes.Entities.Entities
         public DateTime? ModifiedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
-        public string? CustomerName { get; set; }
-        public string? CustomerSurname { get; set; }
 
 
         // Relation Properties
@@ -31,6 +29,6 @@ namespace NTierSardırımRes.Entities.Entities
         public virtual List<Reservation> Reservations { get; set; }
         public virtual List<Order> Orders { get; set; }
         public virtual List<Table> Tables { get; set; }//Garson rolündeki AppUser'larimizin masalarla ilgilenebilmesi adına olusturulmus bir ilişki
-       
+
     }
 }

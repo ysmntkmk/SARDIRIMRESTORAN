@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.PowerBI.Api.Models;
 using NTierSardırımRes.Entities.Enums;
 using NTierSardırımRes.Entities.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NTierSardırımRes.Entities.Entities
 {

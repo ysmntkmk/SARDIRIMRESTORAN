@@ -18,6 +18,6 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.ForgotPasswordViewModel
         [DisplayName("Şifre Tekrar")]
         [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor.")]
         public string ConfirmPassword { get; set; }
-       
+
     }
 }

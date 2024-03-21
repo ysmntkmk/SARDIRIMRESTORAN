@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace NTierSardırımRes.Common
+namespace NTierSardırımRes.Common.EmailSender
 {
     public class EmailSender
     {
+
+        // E-posta gönderme metodunu düzenledik
         public static void SendEmail(string email, string subject, string body)
         {
             //MailMessage
             MailMessage sender = new MailMessage();
-            sender.From = new MailAddress("sardirimrestoran@outlook.com", "Sardırım Project");
+            sender.From = new MailAddress("sardirimrestoran@outlook.com", "Sardirim Restoran");
             sender.Subject = subject;
             sender.Body = body;
             sender.To.Add(email);
@@ -28,5 +26,8 @@ namespace NTierSardırımRes.Common
             smtpClient.Send(sender);
 
         }
+
     }
 }
+
+

@@ -1,16 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using NTierSardırımRes.Common;
 using NTierSardırımRes.DAL.Configurations;
 using NTierSardırımRes.Entities.Base;
 using NTierSardırımRes.Entities.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NTierSardırımRes.DAL.Context
 {
@@ -48,42 +41,46 @@ namespace NTierSardırımRes.DAL.Context
         public DbSet<ProductIngredient> ProductIngredients { get; set; }
         public DbSet<ReservedTable> ReservedTables { get; set; }
         public DbSet<Customer> Customers { get; set; }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             //ChangeTracker
-
             try
             {
                 var modifiedEntries = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
-
                 foreach (var entry in modifiedEntries)
                 {
+                    var entityRepository = entry.Entity as BaseEntitiy;
 
-                    if (entry is BaseEntitiy)
+                    if (entry.State == EntityState.Modified)
                     {
-                        var entityRepository = entry.Entity as BaseEntitiy;
-                        entityRepository.CreatedIpAddress = IPAddressFinder.GetHostName();
+                        //entityRepository.UpdatedDate = DateTime.Now;
+                        //entityRepository.UpdatedIpAddress = IPAddressFinder.GetHostName();
+                        //entityRepository.UpdatedComputerName = System.Environment.MachineName;
+                        //entityRepository.UpdatedDate = DateTime.Now;
+                        //entityRepository.UpdatedIpAddress = IPAddressFinder.GetHostName();
+                        //entityRepository.UpdatedComputerName = System.Environment.MachineName;
 
-                        if (entry.State == EntityState.Modified)
-                        {
-                            entityRepository.UpdatedDate = DateTime.Now;
-                            entityRepository.UpdatedIpAddress = IPAddressFinder.GetHostName();
-                            entityRepository.UpdatedComputerName = System.Environment.MachineName;
-
-
-                        }
                     }
 
                 }
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-
-
             return base.SaveChangesAsync(cancellationToken);
+        }
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+
+            if (!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlServer("server = YSMNTKMK\\SQLEXPRESS ;Database=SardirimDB;Trusted_Connection=True;TrustServerCertificate=True");
+
+
+            base.OnConfiguring(optionsBuilder);
         }
 
     }

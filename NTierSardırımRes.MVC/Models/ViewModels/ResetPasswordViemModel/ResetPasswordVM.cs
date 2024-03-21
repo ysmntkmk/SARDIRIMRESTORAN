@@ -4,20 +4,19 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.ResetPasswordViemModel
 {
     public class ResetPasswordVM
     {
-        [Required(ErrorMessage = "UserId alanı gereklidir.")]
-        public string UserId { get; set; }
 
-        [Required(ErrorMessage = "Token alanı gereklidir.")]
+        public string UserId { get; set; }
         public string Token { get; set; }
 
         [Required(ErrorMessage = "Şifre alanı gereklidir.")]
         [DataType(DataType.Password)]
+        [Display(Name = "Şifre")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Şifre Tekrar alanı gereklidir.")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Şifreler eşleşmiyor.")]
+        [Display(Name = "Şifre Tekrar")]
+        [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor.")]
         public string ConfirmPassword { get; set; }
-        public object Email { get; internal set; }
+        public string Email { get; internal set; }
     }
 }
