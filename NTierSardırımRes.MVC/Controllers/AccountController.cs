@@ -29,6 +29,8 @@ namespace NTierSardırımRes.MVC.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender; // EmailSender bağımlılığını enjekte edin
         }
+        
+
         public IActionResult Index()
         {
             return View();

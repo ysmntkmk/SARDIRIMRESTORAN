@@ -29,6 +29,7 @@ namespace NTierSardırımRes.MVC.Controllers
            
             return View();
         }
+        
 
         public IActionResult Privacy()
         {

@@ -7,8 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\NTierSardırımRes.BLL\NTierSardırımRes.BLL.csproj" />
+		<ProjectReference Include="..\NTierSardırımRes.Entities\NTierSardırımRes.Entities.csproj" />
+		<ProjectReference Include="..\NTierSardırımRes.IOC\NTierSardırımRes.IOC.csproj" />
+		<ProjectReference Include="..\NTierSardırımRes.Common\NTierSardırımRes.Common.csproj" />
+		<ProjectReference Include="..\NTierSardırımRes.MVC\NTierSardırımRes.MVC.csproj" />
+	</ItemGroup>
 
 </Project>

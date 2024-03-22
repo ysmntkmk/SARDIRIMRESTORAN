@@ -10,4 +10,8 @@
     <PackageReference Include="NuGet.Protocol" Version="6.6.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NTierSardırımRes.Entities\NTierSardırımRes.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
