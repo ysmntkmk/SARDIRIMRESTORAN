@@ -27,6 +27,7 @@ namespace NTierSardırımRes.Entities.Base
         public DateTime UpdatedDate { get; set; }
         public string UpdatedIpAddress { get; set; }
         public string UpdatedComputerName { get; set; }
+        public string CreatedComputerName { get; set; }
     }
 }
 

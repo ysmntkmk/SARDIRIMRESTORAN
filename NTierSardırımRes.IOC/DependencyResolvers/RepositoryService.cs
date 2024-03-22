@@ -26,6 +26,9 @@ namespace NTierSardırımRes.IOC.DependencyResolvers
             services.AddScoped<IReservedTableRepository, ReservedTableRepository>();
             services.AddScoped<ITableRepository, TableRepository>();
             services.AddScoped<EmailSender>();
+           
+
+
             return services;
         }
     }

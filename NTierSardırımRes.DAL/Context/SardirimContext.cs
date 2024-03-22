@@ -1,17 +1,24 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using NTierSardırımRes.Common;
 using NTierSardırımRes.DAL.Configurations;
 using NTierSardırımRes.Entities.Base;
 using NTierSardırımRes.Entities.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace NTierSardırımRes.DAL.Context
 {
-    public partial class SardirimContext:IdentityDbContext<AppUser,AppRole,int,IdentityUserClaim<int>,AppUserRole,IdentityUserLogin<int>,IdentityRoleClaim<int>,IdentityUserToken<int>>
+    public class SardirimContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
-        public SardirimContext(DbContextOptions<SardirimContext> options):base(options)
+        public SardirimContext(DbContextOptions<SardirimContext> options) : base(options)
         {
-            
+
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -44,44 +51,43 @@ namespace NTierSardırımRes.DAL.Context
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            //ChangeTracker
-            try
-            {
-                var modifiedEntries = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
-                foreach (var entry in modifiedEntries)
-                {
-                    var entityRepository = entry.Entity as BaseEntitiy;
-
-                    if (entry.State == EntityState.Modified)
-                    {
-                        //entityRepository.UpdatedDate = DateTime.Now;
-                        //entityRepository.UpdatedIpAddress = IPAddressFinder.GetHostName();
-                        //entityRepository.UpdatedComputerName = System.Environment.MachineName;
-                        //entityRepository.UpdatedDate = DateTime.Now;
-                        //entityRepository.UpdatedIpAddress = IPAddressFinder.GetHostName();
-                        //entityRepository.UpdatedComputerName = System.Environment.MachineName;
-
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            UpdateEntityProperties();
             return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void UpdateEntityProperties()
+        {
+            var modifiedEntries = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
+
+            foreach (var entry in modifiedEntries)
+            {
+                var entity = entry.Entity as BaseEntitiy;
+
+                //if (entry.State == EntityState.Modified)
+                //{
+                //    entity.UpdatedDate = DateTime.Now;
+                //    entity.UpdatedIpAddress = IPAddressFinder.GetHostName();
+                //    entity.UpdatedComputerName = System.Environment.MachineName;
+                //}
+                //else if (entry.State == EntityState.Added)
+                //{
+                //    entity.CreatedDate = DateTime.Now;
+                //    entity.CreatedIpAddress = IPAddressFinder.GetHostName();
+                //    entity.CreatedComputerName = System.Environment.MachineName;
+                //}
+            }
         }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
             if (!optionsBuilder.IsConfigured)
                 optionsBuilder.UseSqlServer("server = YSMNTKMK\\SQLEXPRESS ;Database=SardirimDB;Trusted_Connection=True;TrustServerCertificate=True");
 
-
             base.OnConfiguring(optionsBuilder);
         }
+
+
 
     }
 }

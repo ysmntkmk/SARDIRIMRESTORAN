@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.PowerBI.Api.Models;
 using NTierSardırımRes.Entities.Enums;
 using NTierSardırımRes.Entities.Interfaces;
 

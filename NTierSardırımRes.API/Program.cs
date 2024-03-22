@@ -1,14 +1,12 @@
-using Microsoft.EntityFrameworkCore;
-using NTierSardýrýmRes.DAL.Context;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Servislerin eklenmesi
 builder.Services.AddControllers();
 
-// Veritabaný baðlantýsýnýn eklenmesi
-builder.Services.AddDbContext<SardirimContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 //CORS
 builder.Services.AddCors(cors =>
 {
