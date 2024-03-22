@@ -9,44 +9,44 @@ builder.Services.AddControllers();
 // Veritabaný baðlantýsýnýn eklenmesi
 builder.Services.AddDbContext<SardirimContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// CORS politikasýnýn eklenmesi
-builder.Services.AddCors(options =>
+//CORS
+builder.Services.AddCors(cors =>
 {
-    options.AddPolicy("MyCorsPolicy", builder =>
+    cors.AddPolicy("SardirimCors", policy =>
     {
-        builder
-            .WithOrigins("https://localhost:7147")
-            .AllowAnyMethod()
-            .AllowAnyHeader();
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowAnyOrigin();
     });
 });
 
-// Swagger ve API Dokümantasyonu ekleme
+
+
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
 var app = builder.Build();
 
-// HTTP isteklerinin yönlendirilmesi
-app.UseHttpsRedirection();
-
-// CORS politikasýnýn uygulanmasý
-app.UseCors("MyCorsPolicy");
-
-// Routing kullanýmý
-app.UseRouting();
-
-// Endpoint konfigürasyonu
-app.UseEndpoints(endpoints =>
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    endpoints.MapControllers();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-});
+
+
+app.UseHttpsRedirection();
+app.UseCors("SardirimCors");
 
 app.UseAuthorization();
 
+app.MapControllers();
+
 app.Run();
+
+

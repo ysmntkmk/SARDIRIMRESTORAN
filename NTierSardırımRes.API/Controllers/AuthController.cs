@@ -21,7 +21,7 @@ namespace NTierSardırımRes.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                //branch oluşturup bu işlemi gönderin.
+                
                 //kullanıcı veritabanında var mı?
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user == null)
