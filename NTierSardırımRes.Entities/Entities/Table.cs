@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NTierSardırımRes.Entities.Entities
 {
-    public class Table:BaseEntitiy
+    public class Table:BaseEntity
     {
         public bool Available { get; set; }
         public string TableNo { get; set; }

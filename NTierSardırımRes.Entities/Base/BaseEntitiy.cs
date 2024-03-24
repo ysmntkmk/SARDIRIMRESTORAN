@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace NTierSardırımRes.Entities.Base
 {
-    public abstract class BaseEntitiy : IEntity
+    public abstract class BaseEntity : IEntity
 
     {
-     
-        public BaseEntitiy()
+
+
+        public BaseEntity()
         {
             CreatedDate = DateTime.Now;
             Status = DataStatus.Inserted;
+            CreatedComputerName = Environment.MachineName; // veya istediğiniz bir değeri atayın
         }
 
         public int ID { get; set; }
@@ -23,11 +25,12 @@ namespace NTierSardırımRes.Entities.Base
         public DateTime? ModifiedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
-        public string CreatedIpAddress { get; set; }
-        public DateTime UpdatedDate { get; set; }
-        public string UpdatedIpAddress { get; set; }
-        public string UpdatedComputerName { get; set; }
-        public string CreatedComputerName { get; set; }
+        public string? CreatedIpAddress { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public string? UpdatedIpAddress { get; set; }
+        public string? UpdatedComputerName { get; set; }
+        public string? CreatedComputerName { get; set; }
+
     }
 }
 

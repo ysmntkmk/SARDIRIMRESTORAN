@@ -9,7 +9,7 @@ namespace NTierSardırımRes.Entities.Entities
 {
     //1 Ingredient (sogan) => n Product
     //1 Product (Kebap) => n Ingredient
-    public class ProductIngredient:BaseEntitiy
+    public class ProductIngredient:BaseEntity
     {
         public int ProductID { get; set; } //1 Kebap
         public int IngredientID { get; set; } //1 Kırmızı Et

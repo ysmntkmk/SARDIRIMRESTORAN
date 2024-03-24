@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NTierSardırımRes.Entities.Entities
 {
-    public class Order:BaseEntitiy
+    public class Order:BaseEntity
     {
         public OrderPrefix Type { get; set; }
         public int? CustomerID { get; set; } //Order'in eger CustomerID'si bossa anlasılmalıdır ki bu Order zaten Reservation'da verilmiştir

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NTierSardırımRes.Entities.Entities
 {
-    public class OrderDetail:BaseEntitiy
+    public class OrderDetail:BaseEntity
     {
         //OID              PID               Value
         //1                 1(Iskender)      50

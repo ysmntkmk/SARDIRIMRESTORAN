@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NTierSardırımRes.Entities.Entities
 {
-    public class Reservation : BaseEntitiy
+    public class Reservation : BaseEntity
     {
         //DateTime.Now.Month
         public int Day { get; set; }

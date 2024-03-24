@@ -8,10 +8,6 @@
 
 <h2>Müşteriler</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
 
 
 <!-- Müşterilerin listelendiği tablo -->
@@ -68,7 +64,12 @@
                     <a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.ID" class="btn btn-danger">Sil</a>
 
                 </td>
-                
+                <td>
+
+                    <!-- Oluşturma butonu -->
+
+                    <a asp-controller="Customer" asp-action="Create" asp-route-id="@customer.ID" class="btn btn-success">Oluştur</a>
+                </td>
             </tr>
         }
     </tbody>

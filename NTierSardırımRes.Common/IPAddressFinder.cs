@@ -11,7 +11,7 @@ namespace NTierSardırımRes.Common
     {
         public static string GetHostName()
         {
-            string ip = "";
+            string ip = " ";
 
             var hostName = Dns.GetHostName();
             var address = Dns.GetHostAddresses(hostName);

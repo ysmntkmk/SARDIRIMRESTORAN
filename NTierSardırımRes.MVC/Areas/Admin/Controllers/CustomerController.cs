@@ -32,7 +32,6 @@ namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
             return View();
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Create(CustomerCreateVM model)
         {
@@ -42,11 +41,18 @@ namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
                 await _customerRepository.CreateAsync(customer);
                 return RedirectToAction("Index");
             }
+
+            // ModelState'deki hataları göster
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            foreach (var error in errors)
+            {
+                ModelState.AddModelError("", error.ErrorMessage);
+            }
+
             return View(model);
         }
 
         // Update işlemi
-
 
         public async Task<IActionResult> Update(int id)
         {

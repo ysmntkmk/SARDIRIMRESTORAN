@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NTierSardırımRes.Entities.Entities
 {
-    public class Ingredient:BaseEntitiy
+    public class Ingredient:BaseEntity
     {
         public string Name { get; set; }
         public int UnitsInStock { get; set; }

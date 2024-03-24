@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Logging;
 using NTierSardırımRes.Common;
 using NTierSardırımRes.DAL.Configurations;
 using NTierSardırımRes.Entities.Base;
@@ -49,43 +50,58 @@ namespace NTierSardırımRes.DAL.Context
         public DbSet<ReservedTable> ReservedTables { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override int SaveChanges()
         {
-            UpdateEntityProperties();
-            return base.SaveChangesAsync(cancellationToken);
-        }
-
-        private void UpdateEntityProperties()
-        {
-            var modifiedEntries = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
-
-            foreach (var entry in modifiedEntries)
+            var modifierEntries = ChangeTracker.Entries()
+                .Where(x => x.State == EntityState.Modified || x.State == EntityState.Added);
+            try
             {
-                var entity = entry.Entity as BaseEntitiy;
+                foreach (var item in modifierEntries)
+                {
+                    var entityRepository = item.Entity as BaseEntity;
+                    if (entityRepository != null)
+                    {
 
-                //if (entry.State == EntityState.Modified)
-                //{
-                //    entity.UpdatedDate = DateTime.Now;
-                //    entity.UpdatedIpAddress = IPAddressFinder.GetHostName();
-                //    entity.UpdatedComputerName = System.Environment.MachineName;
-                //}
-                //else if (entry.State == EntityState.Added)
-                //{
-                //    entity.CreatedDate = DateTime.Now;
-                //    entity.CreatedIpAddress = IPAddressFinder.GetHostName();
-                //    entity.CreatedComputerName = System.Environment.MachineName;
-                //}
+                        if (item.State == EntityState.Added)
+                        {
+                            entityRepository.CreatedDate = DateTime.Now;
+                            entityRepository.CreatedComputerName = Environment.MachineName;
+                            entityRepository.CreatedIpAddress = IPAddressFinder.GetHostName();
+
+
+                        }
+                        if (item.State == EntityState.Modified)
+                        {
+                            entityRepository.UpdatedDate = DateTime.Now;
+                            entityRepository.UpdatedComputerName = Environment.MachineName;
+                            entityRepository.UpdatedIpAddress = IPAddressFinder.GetHostName();
+
+                        }
+                    }
+                }
+
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return base.SaveChanges();
         }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlServer("server = YSMNTKMK\\SQLEXPRESS ;Database=SardirimDB;Trusted_Connection=True;TrustServerCertificate=True");
+            {
+                optionsBuilder
+                    .UseSqlServer("server=YSMNTKMK\\SQLEXPRESS;Database=SardirimDB;Trusted_Connection=True;TrustServerCertificate=True")
+                    .LogTo(Console.WriteLine, LogLevel.Information); // SQL sorgularını konsola loglamak için
+            }
 
             base.OnConfiguring(optionsBuilder);
         }
+
 
 
 

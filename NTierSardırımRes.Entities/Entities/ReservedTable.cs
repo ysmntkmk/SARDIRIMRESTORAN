@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NTierSardırımRes.Entities.Entities
 {
-    public class ReservedTable:BaseEntitiy
+    public class ReservedTable:BaseEntity
     {
         public int ReservationID { get; set; }
         public int TableID { get; set; }

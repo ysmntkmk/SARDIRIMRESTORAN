@@ -1,10 +1,22 @@
 
 
+using NTierSardýrýmRes.IOC.DependencyResolvers;
+using NTierSardýrýmRes.MVC.UIDependencyResolver;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Servislerin eklenmesi
 builder.Services.AddControllers();
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddIdentityServices();
+
+builder.Services.AddDbContextService();
+//builder.Services.AddRepositoryService();
+
+builder.Services.AddMapperService();
 
 
 //CORS
@@ -18,7 +30,7 @@ builder.Services.AddCors(cors =>
     });
 });
 
-
+RepositoryService.AddRepositoryService(builder.Services);
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

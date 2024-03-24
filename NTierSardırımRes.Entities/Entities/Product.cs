@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NTierSardırımRes.Entities.Entities
 {
-    public class Product:BaseEntitiy
+    public class Product:BaseEntity
     {
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
