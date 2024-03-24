@@ -1,25 +1,16 @@
-
-
 using NTierSardýrýmRes.IOC.DependencyResolvers;
 using NTierSardýrýmRes.MVC.UIDependencyResolver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Servislerin eklenmesi
-builder.Services.AddControllers();
-
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddIdentityServices();
-
 builder.Services.AddDbContextService();
-//builder.Services.AddRepositoryService();
-
 builder.Services.AddMapperService();
+RepositoryService.AddRepositoryService(builder.Services);
 
-
-//CORS
+// CORS
 builder.Services.AddCors(cors =>
 {
     cors.AddPolicy("SardirimCors", policy =>
@@ -30,33 +21,26 @@ builder.Services.AddCors(cors =>
     });
 });
 
-RepositoryService.AddRepositoryService(builder.Services);
-
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+// Swagger/OpenAPI
 builder.Services.AddSwaggerGen();
-
-
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    });
 }
 
-
-
+// HTTP isteði iþleme boru hattýnýn yapýlandýrýlmasý
 app.UseHttpsRedirection();
 app.UseCors("SardirimCors");
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
+
 
 
