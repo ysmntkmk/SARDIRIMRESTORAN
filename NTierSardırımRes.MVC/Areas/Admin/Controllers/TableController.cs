@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NTierSardırımRes.BLL.Abstracts;
 using NTierSardırımRes.BLL.Services;
@@ -9,6 +10,7 @@ using NTierSardırımRes.MVC.Models.ViewModels.TableViewModel;
 namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    
     public class TableController : Controller
     {
         private readonly ITableRepository _tablerepository;

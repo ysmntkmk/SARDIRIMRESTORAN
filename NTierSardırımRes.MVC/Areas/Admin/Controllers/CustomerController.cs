@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NTierSardırımRes.BLL.Abstracts;
 using NTierSardırımRes.Entities.Entities;
@@ -8,6 +9,7 @@ using NTierSardırımRes.MVC.Models.ViewModels.CustomerViewModel;
 namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    
     public class CustomerController : Controller
     {
         private readonly ICustomerRepository _customerRepository;

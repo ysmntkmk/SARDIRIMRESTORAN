@@ -15,11 +15,9 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.RegisterViewModel
         [Required(ErrorMessage = "Müşteri adı alanı gereklidir.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
-
-
-
-
+        [Required(ErrorMessage = "Rol alanı gereklidir.")]
+        [Display(Name = "Rol")]
+        public string Role { get; set; } // Kullanıcının seçeceği rol
 
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NTierSardırımRes.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class srdrm : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,11 +75,11 @@ namespace NTierSardırımRes.DAL.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,11 +98,11 @@ namespace NTierSardırımRes.DAL.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,11 +122,11 @@ namespace NTierSardırımRes.DAL.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -201,6 +201,7 @@ namespace NTierSardırımRes.DAL.Migrations
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
                     RoleId = table.Column<int>(type: "int", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -257,11 +258,11 @@ namespace NTierSardırımRes.DAL.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -289,11 +290,11 @@ namespace NTierSardırımRes.DAL.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -321,11 +322,11 @@ namespace NTierSardırımRes.DAL.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -360,11 +361,11 @@ namespace NTierSardırımRes.DAL.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -396,11 +397,11 @@ namespace NTierSardırımRes.DAL.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -430,11 +431,11 @@ namespace NTierSardırımRes.DAL.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CreatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedIpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedComputerName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -14,6 +14,6 @@ namespace NTierSardırımRes.MVC.Models.ViewModels.LoginViewModel
 
         [Display(Name = "Beni hatırla")]
         public bool RememberMe { get; set; }
-
+        public string? ReturnUrl { get; internal set; }
     }
 }

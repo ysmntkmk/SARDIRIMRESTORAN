@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTierSardırımRes.DAL.Context;
 
@@ -11,9 +12,11 @@ using NTierSardırımRes.DAL.Context;
 namespace NTierSardırımRes.DAL.Migrations
 {
     [DbContext(typeof(SardirimContext))]
-    partial class SardirimContextModelSnapshot : ModelSnapshot
+    [Migration("20240417161943_ysmn")]
+    partial class ysmn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

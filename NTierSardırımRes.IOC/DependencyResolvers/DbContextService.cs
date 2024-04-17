@@ -7,6 +7,7 @@ namespace NTierSardırımRes.IOC.DependencyResolvers
 {
     public static class DbContextService
     {
+
         public static IServiceCollection AddDbContextService(this IServiceCollection services)
         {
             ServiceProvider provider = services.BuildServiceProvider();

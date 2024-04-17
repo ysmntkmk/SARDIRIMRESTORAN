@@ -1,0 +1,31 @@
+﻿@model List<RoleAssignVM>
+
+<h1>Assign Roles</h1>
+
+<div>
+    <form method="post">
+        <input type="hidden" name="userId" value="@ViewData["UserId"]" />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Role Name</th>
+                    <th>Assign</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td>
+                            <input type="checkbox" name="requestList[@role.Id].Exist" @(role.Exist ? "checked" : "") />
+                            <input type="hidden" name="requestList[@role.Id].Id" value="@role.Id" />
+                            <input type="hidden" name="requestList[@role.Id].Name" value="@role.Name" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="submit">Save</button>
+    </form>
+</div>

@@ -29,7 +29,7 @@ namespace NTierSardırımRes.MVC.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender; // EmailSender bağımlılığını enjekte edin
         }
-        
+
 
         public IActionResult Index()
         {
@@ -38,14 +38,15 @@ namespace NTierSardırımRes.MVC.Controllers
 
         // Giriş sayfasını GET isteği ile gösterir
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
-        //Giriş işlemini POST isteği ile gerçekleştirir
         [HttpPost]
-
+        [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Login(LoginVM model)
         {
             if (ModelState.IsValid)
@@ -71,7 +72,15 @@ namespace NTierSardırımRes.MVC.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        // Başarılı giriş işlemi tamamlandığında, returnUrl'i kontrol ederek istenilen sayfaya yönlendirme yapın
+                        if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                        {
+                            return Redirect(model.ReturnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home"); // Varsayılan olarak anasayfaya yönlendirme yapılacak
+                        }
                     }
                     else if (result.RequiresTwoFactor)
                     {

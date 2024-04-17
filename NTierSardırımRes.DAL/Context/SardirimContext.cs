@@ -36,6 +36,8 @@ namespace NTierSardırımRes.DAL.Context
             builder.ApplyConfiguration(new IngredientConfiguration());
             builder.ApplyConfiguration(new ProductIngredientConfiguration());
             builder.ApplyConfiguration(new CustomerConfiguration());
+
+          
         }
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
@@ -102,7 +104,7 @@ namespace NTierSardırımRes.DAL.Context
             base.OnConfiguring(optionsBuilder);
         }
 
-
+      
 
 
     }

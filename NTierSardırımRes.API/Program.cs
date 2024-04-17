@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Servislerin eklenmesi
 builder.Services.AddControllersWithViews();
-builder.Services.AddIdentityServices();
+builder.Services.AddIdentityServicesAsync();
 builder.Services.AddDbContextService();
 builder.Services.AddMapperService();
 RepositoryService.AddRepositoryService(builder.Services);

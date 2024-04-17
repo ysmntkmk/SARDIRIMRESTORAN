@@ -15,22 +15,34 @@ namespace NTierSardırımRes.MVC.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-       
+
         public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
-           
+
         }
 
         public async Task<IActionResult> Index()
         {
-           
+
             return View();
         }
-        
 
+        public IActionResult AdminPage()
+        {
+            if (User.IsInRole("Admin"))
+            {
+                // Kullanıcı "Admin" rolüne sahipse, Admin sayfasını göster
+                return View();
+            }
+            else
+            {
+                // Kullanıcı "Admin" rolüne sahip değilse, yetkisiz erişim için Index sayfasına yönlendir
+                return RedirectToAction("Index", "Home");
+            }
+        }
         public IActionResult Privacy()
         {
             return View();

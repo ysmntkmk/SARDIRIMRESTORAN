@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using NTierSardırımRes.BLL.Abstracts;
 using NTierSardırımRes.BLL.Concretes;
 using NTierSardırımRes.BLL.Services;
 using NTierSardırımRes.Common;
 using NTierSardırımRes.Common.EmailSender;
+using NTierSardırımRes.Entities.Entities;
 
 namespace NTierSardırımRes.IOC.DependencyResolvers
 {
@@ -26,7 +28,7 @@ namespace NTierSardırımRes.IOC.DependencyResolvers
             services.AddScoped<IReservedTableRepository, ReservedTableRepository>();
             services.AddScoped<ITableRepository, TableRepository>();
             services.AddScoped<EmailSender>();
-           
+            services.AddScoped<RoleManager<AppRole>>();
 
 
             return services;

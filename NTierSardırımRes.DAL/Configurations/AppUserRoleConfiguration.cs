@@ -1,24 +1,44 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NTierSardırımRes.Entities.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NTierSardırımRes.DAL.Configurations
 {
-    public class AppUserRoleConfiguration:BaseConfiguration<AppUserRole>
-    {
-        public override void Configure(EntityTypeBuilder<AppUserRole> builder)
+   
+        public class AppUserRoleConfiguration : BaseConfiguration<AppUserRole>
         {
-            base.Configure(builder);
-            builder.Ignore(x => x.ID);
-            builder.HasKey(x => new
+            public void Configure(EntityTypeBuilder<AppUserRole> builder)
             {
-                x.UserId,
-                x.RoleId
-            });
+                builder.Ignore(x => x.ID);
+                // AppUserRole'un User ile olan ilişkisi
+                builder.HasOne(x => x.User)
+                       .WithMany(x => x.UserRoles)
+                       .HasForeignKey(x => x.UserId)
+                       .IsRequired()
+                       .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde kullanıcıya ait roller de silinsin
+
+                // AppUserRole'un Role ile olan ilişkisi
+                builder.HasOne(x => x.Role)
+                       .WithMany(x => x.UserRoles)
+                       .HasForeignKey(x => x.RoleId)
+                       .IsRequired()
+                       .OnDelete(DeleteBehavior.Cascade);
+
+
+                //Seed Data
+                builder.HasData(SeedAppUserRoleData());
+            }
+
+            public List<AppUserRole> SeedAppUserRoleData()
+            {
+                List<AppUserRole> appuserroles = new List<AppUserRole>()
+            {
+                new AppUserRole{UserId=1,RoleId=1}
+
+            };
+
+                return appuserroles;
+            }
         }
-    }
 }
+    
