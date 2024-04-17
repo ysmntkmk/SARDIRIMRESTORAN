@@ -126,27 +126,11 @@ namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
         }
 
 
-        public async Task<IActionResult> Remove(string id)
-        {
-
-            if (!CheckAuthorization(new[] { "admin", "manager" }))
-            {
-                TempData.NoAuthorizationMessage();
-                return RedirectToAction("Index", "Home", new { area = "manager" });
-            }
-            var role = await _roleManager.FindByIdAsync(id);
-            if (role != null)
-            {
-                _roleManager.DeleteAsync(role);
-                return RedirectToAction("Index", "Role", new { area = "manager" });
-
-            }
-            return View(id);
-        }
+    
 
         public async Task<IActionResult> AssignRole(string id)
         {
-            if (!CheckAuthorization(new[] { "admin", "manager" }))
+            if (!CheckAuthorization(new[] { "admin", "user" }))
             {
                 TempData.NoAuthorizationMessage();
                 return RedirectToAction("Index", "Home", new { area = "admin" });
@@ -178,7 +162,7 @@ namespace NTierSardırımRes.MVC.Areas.Admin.Controllers
         public async Task<ActionResult> AssignRole(string userId, List<RoleAssignVM> requestList)
         {
 
-            if (!CheckAuthorization(new[] { "admin", "admin" }))
+            if (!CheckAuthorization(new[] { "admin", "user" }))
             {
                 TempData.NoAuthorizationMessage();
                 return RedirectToAction("Index", "Home", new { area = "admin" });
